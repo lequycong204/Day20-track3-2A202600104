@@ -130,15 +130,18 @@ class LLMClient:
                          Load from lab_default.yaml via load_agent_config() for consistency.
         """
         logger.debug("LLMClient.complete | model=%s temperature=%s", self._model, temperature)
-
-        response = self._client.chat.completions.create(
-            model=self._model,
-            temperature=temperature,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-        )
+        try:
+            response = self._client.chat.completions.create(
+                model=self._model,
+                temperature=temperature,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+            )
+        except Exception as e:
+            logger.error(f"LLMClient.complete | Error: {e}")
+            return LLMResponse(content="", input_tokens=0, output_tokens=0, cost_usd=0)
 
         choice = response.choices[0]
         content = choice.message.content or ""
