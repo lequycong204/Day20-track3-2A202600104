@@ -5,17 +5,20 @@ lab:
 
 agents:
   supervisor:
-    model: gpt-4o-mini
+    model: gpt-oss-120b
     temperature: 0.0
   researcher:
-    model: gpt-4o-mini
+    model: gpt-oss-120b
     temperature: 0.2
   analyst:
-    model: gpt-4o-mini
+    model: gpt-oss-120b
     temperature: 0.1
   writer:
-    model: gpt-4o-mini
+    model: gpt-oss-120b
     temperature: 0.4
+  critic:
+    model: gpt-oss-120b
+    temperature: 0.0
 
 benchmark:
   queries:
