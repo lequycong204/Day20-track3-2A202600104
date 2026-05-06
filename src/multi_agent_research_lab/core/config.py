@@ -19,7 +19,7 @@ class Settings(BaseSettings):
 
     openai_api_key: str | None = Field(default=None, validation_alias="OPENAI_API_KEY")
     openai_model: str = Field(default="gpt-4o-mini", validation_alias="OPENAI_MODEL")
-    base_url: str = Field(default=None, validation_alias="BASE_URL")
+    base_url: str | None = Field(default=None, validation_alias="BASE_URL")
 
     langsmith_api_key: str | None = Field(default=None, validation_alias="LANGSMITH_API_KEY")
     langsmith_project: str = Field(
