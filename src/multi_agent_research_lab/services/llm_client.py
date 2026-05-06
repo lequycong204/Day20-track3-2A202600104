@@ -73,13 +73,13 @@ class LLMClient:
     def __init__(self) -> None:
         settings = get_settings()
         if not settings.openai_api_key:
-            logger.error(
+            logger.warning(
                 "OPENAI_API_KEY is not set. "
                 "Add it to your .env file or set the environment variable."
             )
 
         if not settings.base_url:
-            logger.error(
+            logger.warning(
                 "BASE_URL is not set. "
                 "Add it to your .env file or set the environment variable."
             )
