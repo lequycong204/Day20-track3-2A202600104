@@ -27,7 +27,10 @@ class ResearchState(BaseModel):
     trace: list[dict[str, Any]] = Field(default_factory=list)
     errors: list[str] = Field(default_factory=list)
 
-    def record_route(self, route: str) -> None:
+    def record_route(self, route) -> None:
+        # Store the route as a plain string for test compatibility.
+        if not isinstance(route, str):
+            route = getattr(route, "value", str(route))
         self.route_history.append(route)
         self.iteration += 1
 

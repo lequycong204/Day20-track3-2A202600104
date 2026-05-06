@@ -1,6 +1,9 @@
 """Public schemas exchanged between CLI, agents, and evaluators."""
 
-from enum import StrEnum
+try:
+    from enum import StrEnum
+except ImportError:
+    from enum import Enum as StrEnum
 from typing import Any
 
 from pydantic import BaseModel, Field

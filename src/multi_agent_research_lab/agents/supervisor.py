@@ -108,7 +108,7 @@ class SupervisorAgent(BaseAgent):
         state.add_trace_event(
             "supervisor_route",
             {
-                "route": route,
+                "route": (route if isinstance(route, str) else getattr(route, "value", str(route))),
                 "iteration": state.iteration,
                 "rewrite_count": state.rewrite_count,
                 "has_sources": bool(state.sources),
