@@ -73,13 +73,13 @@ class LLMClient:
     def __init__(self) -> None:
         settings = get_settings()
         if not settings.openai_api_key:
-            raise ValueError(
+            logger.error(
                 "OPENAI_API_KEY is not set. "
                 "Add it to your .env file or set the environment variable."
             )
-        
+
         if not settings.base_url:
-            raise ValueError(
+            logger.error(
                 "BASE_URL is not set. "
                 "Add it to your .env file or set the environment variable."
             )
@@ -89,12 +89,15 @@ class LLMClient:
             raise ImportError(
                 "openai package is not installed. Run: pip install -e '.[llm]'"
             ) from exc
-
-        self._client = OpenAI(
-            api_key=settings.openai_api_key,
-            base_url=settings.base_url,
-            timeout=float(settings.timeout_seconds),
-        )
+        
+        try:
+            self._client = OpenAI(
+                api_key=settings.openai_api_key,
+                base_url=settings.base_url,
+                timeout=float(settings.timeout_seconds),
+            )
+        except Exception as e:
+            logger.error(f"LLMClient.init | Error: {e}")
 
         # ── Wrap with LangSmith tracer if active ──────────────────────────────
         # This makes every LLM call (prompt, response, tokens) visible in
