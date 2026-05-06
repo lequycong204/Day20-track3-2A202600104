@@ -17,7 +17,7 @@ from multi_agent_research_lab.core.config import get_settings
 
 logger = logging.getLogger(__name__)
 
-_CONFIGS_DIR = pathlib.Path(__file__).parents[4] / "configs"
+_CONFIGS_DIR = pathlib.Path(__file__).parents[3] / "configs"
 
 def load_agent_config(agent_name: str) -> dict[str, Any]:
     """Load agent-specific config (model, temperature) from lab_default.yaml.

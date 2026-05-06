@@ -1,12 +1,12 @@
 """Public schemas exchanged between CLI, agents, and evaluators."""
 
-from enum import StrEnum
+from enum import Enum
 from typing import Any
 
 from pydantic import BaseModel, Field
 
 
-class AgentName(StrEnum):
+class AgentName(str, Enum):
     SUPERVISOR = "supervisor"
     RESEARCHER = "researcher"
     ANALYST = "analyst"
